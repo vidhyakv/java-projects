@@ -16,13 +16,12 @@ public class LoanAccount {
         lumpSumPayments.addPayment(emiNo, amount);
     }
 
-    public void getBalance(int emiNo) {
+    public BalanceResponse getBalance(int emiNo) {
         int totalEMIPaid = emiPayments.getTotalPaidThroughEMIs(emiNo);
         int totalLumpSumPaid = lumpSumPayments.getTotalLumpSumPaidUpTo(emiNo);
         int totalPaid = totalEMIPaid + totalLumpSumPaid;
         int remainingAmount = Math.max(0, loanDetails.totalAmount - totalPaid);
         int remainingEMIs = (int) Math.ceil((double) remainingAmount / loanDetails.emiAmount);
-
-        System.out.println(loanDetails.bankName + " " + loanDetails.borrowerName + " " + totalPaid + " " + remainingEMIs);
+        return new BalanceResponse(loanDetails.bankName, loanDetails.borrowerName, totalPaid, remainingEMIs);
     }
 }
