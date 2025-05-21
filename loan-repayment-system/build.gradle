@@ -3,6 +3,8 @@ plugins {
     id 'application'
 }
 
+group = 'com.ledgerco'
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
